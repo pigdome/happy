@@ -1,0 +1,45 @@
+from django.db import models
+
+class Preference(models.Model)
+    electricity_unit_cost   = models.FloatField()
+    water_unit_cost         = models.FloatField()
+    line_fee                = models.FloatField()
+    
+
+class RoomType(models.Model)
+    code            = models.CharField(max_length=100)
+    description     = models.TextField()
+    price           = models.FloatField()
+    maintenance_fee = models.FloatField()
+
+class Room(models.Model)
+    room_id             = models.AutoField(primary_key=True)
+    room_number         = models.CharField(max_length=100)
+    type                = models.ForeignKey(RoomType, on_delete=models.DO_NOTHING)
+    location            = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
+    wifi_fee            = models.FloatField()
+    line_fee            = models.FloatField()
+    park_fee            = models.FloatField()
+    clean_fee           = models.FloatField()
+    electricity_unit    = models.FloatField()
+    water_unit          = models.FloatField()
+
+class Rent(models.Model)
+    room_id                 = models.ForeignKey(Room, on_delete=models.DO_NOTHING)
+    rent_cost               = models.FloatField()
+    electricity_unit_last   = models.FloatField()
+    electricity_unit_last   = models.FloatField()
+    electricity_unit_cost   = 
+    electricity_cost        = models.FloatField()
+    water_unit_last         = models.FloatField()
+    water_unit_last         = models.FloatField()
+    water_cost              = models.FloatField()
+    wifi_fee                = models.FloatField()
+    line_fee                = models.FloatField()
+    park_fee                = models.FloatField()
+    total                   = models.FloatField()
+    created_date            = models.DateTimeField(editable=False, auto_now_add=True)
+    paid_date               = models.DateTimeField(editable=False, default=None)
+    payee                   = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    payment_type            = models.ForeignKey(PaymentType, on_delete=models.DO_NOTHING)
+    
